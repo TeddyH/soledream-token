@@ -48,12 +48,14 @@ contract("SoleDreamToken", (accounts) => {
 
     });
 
-    it("my account 에 2 SLDT 전송한다. transferFrom 사용.", async () => {
+    it("my account 에 0.0000000000000200000 SLDT 전송한다. transferFrom 사용.", async () => {
 
-        // 내 친구가 200000 을 계좌에서 토큰을 가져갈 권한을 부여
+        // 내 친구가 200000 을 계좌에서 토큰을 가져갈 권한을 부여 (내 친구는 0토큰, 나는 200....000토큰)
         //   내 친구가 토큰 주인의 계좌에서 가져갈 수 있는 토큰의 수를 반환
         //     토큰 주인이 나에게 allowed 된 토큰을 전송
         //       토큰 주인의 잔액 확인
+        //
+        // 요청은 친구가 했는데 내가 가져가는 시나리오??
         //
         return token.approve(myFriendAccount, 200000).then(() => {
             return token.allowance(owner, myFriendAccount);
@@ -74,7 +76,7 @@ contract("SoleDreamToken", (accounts) => {
         });
     });
 
-    it("should show the transfer event", function() {
+    it("전송 이벤트 출력", function() {
         var token1;
         return SoleDreamToken.deployed().then(function(instance){
             token1 = instance;
@@ -83,34 +85,6 @@ contract("SoleDreamToken", (accounts) => {
             console.log(result.logs[0].event)
         })
     });
-    // it("transfer test", async () => {
-    //     console.log("accounts[2] : " + accounts[2]);
-    //
-    //     let tx = await token.transfer(accounts[2], 200000000, {from: owner});
-    //
-    //     // truffleAssert.eventEmitted(tx, "Transfer", (ev) => {
-    //     //     return true;
-    //     // });
-    //
-    //     // truffleAssert.eventNotEmitted(tx, "Transfer");
-    //
-    //     assert.isTrue(token.balanceOf(accounts[2]) > 0, "transfer fail. to : " + accounts[2] + ", value : " + 20000000000);
-    // });
-
-    // it("spender에게 tokens 수만큼 계좌에서 토큰을 가져갈 권한을 부여한다.", async () => {
-    //     console.log("accounts[2] : " + accounts[2]);
-    //
-    //     let result = await token.approve(accounts[2], 20000000000, {from: owner});
-    //     truffleAssert.eventNotEmitted(result, "Approval");
-    //
-    //
-    //     assert.isTrue(result, "권한 부여 실패...");
-    // });
-
-    // it("from에서 to에게 allowed된 tokens를 전송한다.", async () => {
-    //     const result = await wifeCoin.transferFrom(owner, accounts[2], 20000000000, {from: owner});
-    //     assert.isTrue(result, "from :" + owner + ", to : " + accounts[2] + ", allowed된 tokens를 전송 실패");
-    // });
 
     it("토큰 전송 후 잔고를 확인한다.", async () => {
         const ownerTokenBalance = await token.balanceOf(owner);
