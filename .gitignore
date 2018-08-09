@@ -138,3 +138,5 @@ fabric.properties
 .idea/httpRequests
 
 build/
+
+*.iml
