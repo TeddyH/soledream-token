@@ -10,8 +10,9 @@ contract TestSoleDreamToken {
         SoleDreamToken soleDreamToken = SoleDreamToken(DeployedAddresses.SoleDreamToken());
 
         uint expected = 1000000;
+//        address owner_0 = soleDreamToken.tokenOwner(0);
 
-        Assert.equal(soleDreamToken.getBalance(tx.origin), expected, "Owner should have 10000 SoleDreamToken initially");
+        Assert.equal(soleDreamToken.balanceOf(owner_0), expected, "Owner should have 1000000 SoleDreamToken initially");
     }
 
     function testInitialBalanceWithNewSoleDreamToken() public {
@@ -19,7 +20,7 @@ contract TestSoleDreamToken {
 
         uint expected = 1000000;
 
-        Assert.equal(soleDreamToken.getBalance(tx.origin), expected, "Owner should have 10000 SoleDreamToken initially");
+        Assert.equal(soleDreamToken.balanceOf(msg.sender), expected, "Owner should have 1000000 SoleDreamToken initially");
     }
 
 }
