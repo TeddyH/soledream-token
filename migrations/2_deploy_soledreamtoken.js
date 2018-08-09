@@ -1,6 +1,6 @@
-const soleDreamToken = artifacts.require("./SoleDreamToken.sol");
+const SoleDreamToken = artifacts.require("./SoleDreamToken.sol");
 
 module.exports = function(deployer) {
-    deployer.deploy(soleDreamToken);
+    deployer.deploy(SoleDreamToken);
 };
 
